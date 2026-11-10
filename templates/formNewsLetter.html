@@ -1,0 +1,40 @@
+<html>
+<meta charset="UTF-8">
+<section>
+    <p>Souscrire à la newsletter!</p><br>
+    <input type="email" name="email" placeholder="Entrez votre email"><br>
+    <input type="checkbox" name="consent" value="1"> J'accepte de recevoir des emails de la part de l'entreprise.<br>
+    <input type="submit" value="Souscrire">
+    <p>Vous pouvez vous désabonner à tout moment en cliquant sur le lien de désabonnement dans nos emails.<br>
+        Pour plus d'informations sur la manière dont nous traitons vos données personnelles, veuillez consulter notre <a
+            href="/politique-de-confidentialite" id="policy-link">politique de confidentialité</a>.</p>
+</section>
+<script>
+    document.getElementById('policy-link').addEventListener('click', async function (e) {
+
+        // Empêche la navigation normale
+        e.preventDefault();
+
+        // Récupère l'URL du lien
+        const url = this.href;
+
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+
+            document.getElementById('policity-content').innerHTML = html;
+
+            const modal = new bootstrap.Modal(
+                document.getElementById('privacyModal')
+            );
+
+            modal.show();
+
+        } catch (error) {
+            console.error(error);
+            window.location.href = url; // secours si erreur
+        }
+    });
+</script>
+
+</html>
