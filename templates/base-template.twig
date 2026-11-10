@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel='stylesheet' type='text/css' href='style.css'> -->
+        <link rel='stylesheet' type='text/css' href='CSS/styles.css'>
+        <script src='./node_modules/bootstrap/dist/js/bootstrap.bundle.js'></script>
+        {% block css %}
+        {% endblock %}
+        <title>{% block title %}
+                {{ constant('WEBSITE_TITLE') }} - Les catégories de recettes
+            {% endblock %}</title>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar bg-1 fg-2">
+                <div class="container-fluid">
+                    <a class=" max-h-100" href="#"><img src="/images/logo_color_urbainpact.png" style="max-height: 100px;"></a>
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link active theme-primary btn-solid btn-styled" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn-outline theme-success" type="submit">Search</button>
+                        </form>
+                </div>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>
+            <p>Ce site est un contre exemple. Il montre ce qu'il ne faut pas faire </p>
+            <p><a href="licence.php">Les licences des images</a></p>
+        </footer>
+        {% block script %}
+        {% endblock %}
+    </body>
+
+</html>
