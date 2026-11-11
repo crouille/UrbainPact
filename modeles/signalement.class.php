@@ -1,6 +1,7 @@
 <?php
 
-class Signalement{
+class Signalement
+{
     // J'ai mit l'équipe assignée en commentaire parce qu'on s'en fout pour l'instant
     // J'ai mit aussi le créateur en commentaire parce que y'aura des conflits si je fais le modèle d'Utilisateur maintenant...vu que les autres font la connexion
 
@@ -15,7 +16,7 @@ class Signalement{
     // private ?Utilisateur $createur;
     // private ?Equipe $equipeAssignee;
 
-    public function __construct(?int $id=null, ?string $t=null, ?string $de=null, ?DateTime $dh=null, ?int $u=null, ?int $dv=null, ?Categorie $ca=null, ?array $p=null, /*?Utilisateur $cr=null, ?Equipe $e=null*/)
+    public function __construct(?int $id = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?int $u = null, ?int $dv = null, ?Categorie $ca = null, ?array $p = null, /*?Utilisateur $cr=null, ?Equipe $e=null*/)
     {
         $this->setId($id);
         $this->setTitre($t);
@@ -29,86 +30,86 @@ class Signalement{
         // $this->setEquipeAssignee($e);        
     }
 
-    public function getId() : ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(?int $id) : void
+    public function setId(?int $id): void
     {
-        $this->id = $id;        
+        $this->id = $id;
     }
 
-    public function getTitre() : ?string
+    public function getTitre(): ?string
     {
         return $this->titre;
     }
 
-    public function setTitre(?string $titre) : void
+    public function setTitre(?string $titre): void
     {
         $this->titre = $titre;
     }
 
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description) : void
+    public function setDescription(?string $description): void
     {
-        $this->description = $description;       
+        $this->description = $description;
     }
-    
-    public function getDateHeure() : ?DateTime
+
+    public function getDateHeure(): ?DateTime
     {
         return $this->dateHeure;
     }
 
-    public function setDateHeure(?DateTime $dateHeure) : void
+    public function setDateHeure(?DateTime $dateHeure): void
     {
-        $this->dateHeure = $dateHeure;        
+        $this->dateHeure = $dateHeure;
     }
 
-    public function getUpvote() : ?int
+    public function getUpvote(): ?int
     {
         return $this->upvote;
     }
 
-    public function setUpvote(?int $upvote) : void
+    public function setUpvote(?int $upvote): void
     {
-        $this->upvote = $upvote;        
+        $this->upvote = $upvote;
     }
 
-    public function getDownvote() : ?int
+    public function getDownvote(): ?int
     {
         return $this->downvote;
     }
 
-    public function setDownvote(?int $downvote) : void
+    public function setDownvote(?int $downvote): void
     {
-        $this->downvote = $downvote;        
+        $this->downvote = $downvote;
     }
 
-    public function getCategorie() : ?Categorie
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?Categorie $categorie) : void
+    public function setCategorie(?Categorie $categorie): void
     {
-        $this->categorie = $categorie;        
+        $this->categorie = $categorie;
     }
 
-    public function getPhotos() : ?array
+    public function getPhotos(): ?array
     {
         return $this->photos;
     }
 
-    public function setPhotos(?array $photos) : void
+    public function setPhotos(?array $photos): void
     {
-        $this->photos = $photos;        
+        $this->photos = $photos;
     }
- 
+
     /*public function getCreateur() : ?Utilisateur
     {
         return $this->createur;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Les signalements</title>
+    </head>
+    <body>
+        <h1>Les signalements</h1>
+
+        {% for signalement in signalements %}
+            <div>
+                <h2>{{ signalement.titre }}</h2>
+                <p>Description : {{ signalement.description|slice(0, 100) }}...</p>
+                <p>Catégorie : {{ signalement.categorie.libelle ?? 'Non catégorisé' }}</p>
+                <p>Date : {{ signalement.dateHeure }}</p>
+                <p>Adresse : {{ signalement.adresse ?? 'Non renseignée' }}</p>
+                <p>État : {{ signalement.etat ?? 'Validé' }}</p>
+                <p>Upvotes : {{ signalement.upvote }} | Downvotes : {{ signalement.downvote }}</p>
+            </div>
+            <hr>
+        {% else %}
+            <p>Aucun signalement.</p>
+        {% endfor %}
+    </body>
+</html>

@@ -3,14 +3,20 @@
 use TWIG\Loader\FilesystemLoader;
 use TWIG\Environment;
 
-class ControllerSignalement extends Controller {
+class ControllerSignalement extends Controller
+{
     public function __construct(FilesystemLoader $l, Environment $t)
     {
         return parent::__construct($l, $t);
     }
 
-    public function afficher(){
-        //afficher un seul signalement avec des détails, on fera après
+    public function afficher(): void
+    {
+        $dao = new SignalementDAO($this->getPdo());
+        $signalements = $dao->findAllWithDetail();
+
+        $template = $this->getTwig()->load('signalements.html.twig');
+        echo $template->render(['signalements' => $signalements]);
     }
 
     /* 
@@ -18,7 +24,8 @@ class ControllerSignalement extends Controller {
     et oublie pas aussi que ta page tu l'accède en écrivant ça à côté de l'url entier (localhost/UrbainPact ou autre chose par rapport à ton serveur) : '?controleur=signalement&methode=lister' par exemple
     */
 
-    public function listerSansDetails(){
+    public function listerSansDetails()
+    {
         // lister les signalements sans les photos et la catégorie, seulement si tu veux pas les utiliser
         $manager = new SignalementDAO($this->getPdo());
         $signalements = $manager->findAll();
@@ -29,7 +36,8 @@ class ControllerSignalement extends Controller {
         ));
     }
 
-    public function lister(){
+    public function lister()
+    {
         // lister les signalements avec les photos et la catégorie
         $manager = new SignalementDAO($this->getPdo());
         $signalements = $manager->findAllWithDetail();

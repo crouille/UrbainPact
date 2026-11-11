@@ -1,6 +1,7 @@
 <?php
 
-class Bd {
+class Bd
+{
     private static ?Bd $instance = null;
 
     private ?PDO $pdo;
@@ -8,31 +9,30 @@ class Bd {
     private function __construct()
     {
         try {
-            $this->pdo = new PDO('mysql:host='. DB_HOST . ';dbname=' . DB_NAME , DB_USER , DB_PASS);
+            $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e){
+        } catch (PDOException $e) {
             die("Connexion à la BD échouée : " . $e->getMessage());
-        } 
+        }
     }
 
-    public static function getInstance() : ?Bd {
-        if(self::$instance == null){
+    public static function getInstance(): ?Bd
+    {
+        if (self::$instance == null) {
             self::$instance = new Bd();
         }
         return self::$instance;
     }
 
-    public function getConnexion() : ?PDO {
+    public function getConnexion(): ?PDO
+    {
         return $this->pdo;
     }
 
-    private function __clone()
+    private function __clone() {}
+
+    public function __wakeup()
     {
-
-    }
-
-    public function __wakeup(){
         throw new Exception("Un singleton ne doit pas être deserialisé");
     }
 }

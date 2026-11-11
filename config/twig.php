@@ -1,4 +1,5 @@
 <?php
+
 use Twig\Extra\Intl\IntlExtension;
 
 $loader = new Twig\Loader\FilesystemLoader('templates');
