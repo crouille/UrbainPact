@@ -21,7 +21,7 @@ class Controller
             $this->get = $_GET;
         }
 
-        if (isset($_POST) && !empty($_GET)) {
+        if (isset($_POST) && !empty($_POST)) {
             $this->post = $_POST;
         }
     }

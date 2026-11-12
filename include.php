@@ -4,12 +4,14 @@ require_once "vendor/autoload.php";
 require_once "config/constantes.php";
 require_once "config/twig.php";
 
-// Controleurs
+// Contrôleurs
 require_once "controllers/controller.class.php";
 require_once "controllers/controller_factory.class.php";
+require_once "controllers/controller_signalement.class.php";
 
 // Modèles
 require_once "modeles/bd.class.php";
 require_once "modeles/categorie.class.php";
+require_once "modeles/photo.class.php";
 require_once "modeles/signalement.class.php";
 require_once "modeles/signalement.dao.php";

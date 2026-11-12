@@ -21,7 +21,7 @@ class SignalementDAO
 
     public function findAll(): ?array
     {
-        $sql = "SELECT * FROM " . PREFIXE . "signalement ORDER BY dateHeure DESC, upvote DESC";
+        $sql = "SELECT * FROM " . PREFIXE . "signalement ORDER BY dateHeure DESC, upvote DESC, S.id";
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_ASSOC);
@@ -38,7 +38,7 @@ class SignalementDAO
         FROM " . PREFIXE . "signalement S
         INNER JOIN " . PREFIXE . "categorie C ON S.idCategorie = C.id
         LEFT JOIN " . PREFIXE . "photo P ON S.id = P.idSignalement
-        ORDER BY S.dateHeure DESC, S.upvote DESC";
+        ORDER BY S.dateHeure DESC, S.upvote DESC, S.id";
 
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
@@ -50,7 +50,12 @@ class SignalementDAO
 
     public function hydrate(?array $tab): ?Signalement
     {
-        $signalement = new Signalement($tab[0]['id'], $tab[0]['titre'], $tab[0]['description'], $tab[0]['dateHeure'], $tab[0]['upvote'], $tab[0]['downvote']);
+        $signalement = new Signalement(
+                $tab[0]['id'], $tab[0]['titre'], $tab[0]['description'],
+                new DateTime($tab[0]['dateHeure']),
+                $tab[0]['upvote'], $tab[0]['downvote']
+        );
+
         if (isset($tab[0]['categorie_id'])) {
             $categorie = new Categorie($tab[0]['categorie_id'], $tab[0]['categorie_libelle']);
             $signalement->setCategorie($categorie);
