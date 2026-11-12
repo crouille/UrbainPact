@@ -1,5 +1,8 @@
 <?php
 
+// définir le fuseau horaire à celui de Paris
+date_default_timezone_set('Europe/Paris');
+
 // constantes pour PDO
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'urbainpact');
