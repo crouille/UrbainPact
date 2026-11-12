@@ -11,3 +11,6 @@ define('DB_PASS', '');
 
 // constante pour qu'on n'ait pas à réécrire le début de chaque table
 define('PREFIXE', 'up_');
+
+// nom du site
+define('WEBSITE_TITLE', 'UrbainPact');

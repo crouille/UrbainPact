@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Les signalements</title>
-    </head>
-    <body>
-        <h1>Les signalements</h1>
+{% extends 'base_template.html.twig' %}
 
+{% block title %}Signalements{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Signalements</h1>
         {% for signalement in signalements %}
             <div>
                 <h2>{{ signalement.titre }}</h2>
@@ -28,5 +26,5 @@
         {% else %}
             <p>Aucun signalement.</p>
         {% endfor %}
-    </body>
-</html>
+    </main>
+{% endblock %}
