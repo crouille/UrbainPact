@@ -16,7 +16,9 @@
                 <p>Chemins photos :</p>
                 <ul>
                     {% for photo in signalement.photos %}
-                        <li>{{ photo.url }}</li>
+                        <li>
+                            <img src="{{ photo.url }}">
+                        </li>
                     {% else %}
                         <li>Aucune photo</li>
                     {% endfor %}
