@@ -11,12 +11,13 @@ class Signalement
     private ?DateTime $dateHeure;
     private ?int $upvote;
     private ?int $downvote;
-    private ?Categorie $categorie;
+    private ?array $categories;
+    private ?string $etat;
     private ?array $photos;
     // private ?Utilisateur $createur;
     // private ?Equipe $equipeAssignee;
 
-    public function __construct(?int $id = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?int $u = null, ?int $dv = null, ?Categorie $ca = null, ?array $p = null, /*?Utilisateur $cr=null, ?Equipe $e=null*/)
+    public function __construct(?int $id = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?int $u = null, ?int $dv = null, ?string $et = null, ?array $ca = null, ?array $p = null, /*?Utilisateur $cr=null, ?Equipe $e=null*/)
     {
         $this->setId($id);
         $this->setTitre($t);
@@ -24,7 +25,8 @@ class Signalement
         $this->setDateHeure($dh);
         $this->setUpvote($u);
         $this->setDownvote($dv);
-        $this->setCategorie($ca);
+        $this->setEtat($et);
+        $this->setCategories($ca);
         $this->setPhotos($p);
         // $this->setCreateur($cr);
         // $this->setEquipeAssignee($e);        
@@ -90,14 +92,22 @@ class Signalement
         $this->downvote = $downvote;
     }
 
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
+    public function getEtat(): ?string {
+        return $this->etat;
     }
 
-    public function setCategorie(?Categorie $categorie): void
+    public function setEtat(?string $etat): void {
+        $this->etat = $etat;
+    }
+
+    public function getCategories(): ?array
     {
-        $this->categorie = $categorie;
+        return $this->categories;
+    }
+
+    public function setCategories(?array $categories): void
+    {
+        $this->categories = $categories;
     }
 
     public function getPhotos(): ?array

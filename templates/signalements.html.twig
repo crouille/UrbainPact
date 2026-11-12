@@ -10,9 +10,19 @@
                 <h2>{{ signalement.titre }}</h2>
                 <p>Id : {{ signalement.id }}</p>
                 <p>Description : {{ signalement.description }}</p>
-                <p>Catégorie : {{ signalement.categorie.libelle ?? 'Non catégorisé' }}</p>
+                <p>Catégories :
+                    {% for categorie in signalement.categories %}
+                        {{ categorie.libelle }}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                    {% else %}
+                        Non Catégorisé
+                    {% endfor %}
+                </p>
                 <p>Date : {{ signalement.dateHeure|date('d/m/Y à H:i') }}</p>
                 <p>Upvotes : {{ signalement.upvote }} | Downvotes : {{ signalement.downvote }}</p>
+                <p>État : {{ signalement.etat }}</p>
                 <p>Chemins photos :</p>
                 <ul>
                     {% for photo in signalement.photos %}
