@@ -1,8 +1,4 @@
 UrbainPact.code-workspace
 node_modules
 vendor
-package-lock.json
-package.json
-composer.json
-composer.lock
 .idea
