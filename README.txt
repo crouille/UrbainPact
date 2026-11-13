@@ -7,3 +7,5 @@ creer bdd a partir du schema
 verifier compatibilité tailwind sur lakartxela
 
 decider de l'import de la bibliotheque graphique (bootstrap, tailwind et sur quel theme(material3expressive)) 
+
+mettre les données des clés étrangères en tant qu'objets dans la classe Signalement
