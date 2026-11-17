@@ -1,5 +1,11 @@
 # UrbainPact
 
+## Configuration
+
+Le fichier config/config.json n'est pas versionné (il contient le mot de passe de la BD).
+1. Copier config/config_template.json et le renommer en config/config.json
+2. Remplir les valeurs vides (host, user, pass) et adapter les autres si besoin
+
 Organisation des dossiers et sous dossiers du dépôt
 
 créer index.php
