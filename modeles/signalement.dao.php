@@ -21,7 +21,8 @@ class SignalementDAO
 
     public function findAll(): ?array
     {
-        $sql = "SELECT * FROM " . PREFIXE . "signalement ORDER BY dateHeure DESC, upvote DESC, id";
+        $prefixe = Config::get('database')['prefixe'];
+        $sql = "SELECT * FROM " . $prefixe . "signalement ORDER BY dateHeure DESC, upvote DESC, id";
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_ASSOC);
@@ -32,13 +33,14 @@ class SignalementDAO
 
     public function findAllWithDetail(): ?array
     {
+        $prefixe = Config::get('database')['prefixe'];
         $sql = "SELECT S.id, S.titre, S.description, S.dateHeure, S.upvote, S.downvote, S.etat,
         C.id as categorie_id, C.libelle as categorie_libelle,
         P.id as photo_id, P.url as photo_url
-        FROM " . PREFIXE . "signalement S
-        INNER JOIN " . PREFIXE . "signalement_categorie SC ON S.id = SC.idSignalement
-        INNER JOIN " . PREFIXE . "categorie C ON SC.idCategorie = C.id
-        LEFT JOIN " . PREFIXE . "photo P ON S.id = P.idSignalement
+        FROM " . $prefixe . "signalement S
+        INNER JOIN " . $prefixe . "signalement_categorie SC ON S.id = SC.idSignalement
+        INNER JOIN " . $prefixe . "categorie C ON SC.idCategorie = C.id
+        LEFT JOIN " . $prefixe . "photo P ON S.id = P.idSignalement
         ORDER BY S.dateHeure DESC, S.upvote DESC, S.id";
 
         $pdoStatement = $this->getPdo()->prepare($sql);

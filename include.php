@@ -1,7 +1,8 @@
 <?php
 // Fichiers de config
 require_once "vendor/autoload.php";
-require_once "config/constantes.php";
+require_once "config/config.class.php";
+date_default_timezone_set(Config::get('localization')['timezone']);
 require_once "config/twig.php";
 
 // Contrôleurs

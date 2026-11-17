@@ -26,7 +26,6 @@ class Config
         return self::$config;
     }
 
-    // ex : Config::get('database')['host']
     public static function get(string $cle): mixed
     {
         return self::getConfig()[$cle] ?? null;

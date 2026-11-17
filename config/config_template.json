@@ -1,0 +1,15 @@
+{
+  "database": {
+    "host": "",
+    "user": "",
+    "pass": "",
+    "name": "UrbainPact",
+    "prefixe": "up_"
+  },
+  "website": {
+    "title": "UrbainPact"
+  },
+  "localization": {
+    "timezone": "Europe/Paris"
+  }
+}

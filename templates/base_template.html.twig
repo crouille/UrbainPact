@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block css %} {% endblock %}
-    <title>{% block title %}{{ constant('WEBSITE_TITLE') }}{% endblock %}</title>
+    <title>{% block title %}{{ config.website.title }}{% endblock %}</title>
 </head>
 <body>
 <header>
@@ -16,7 +16,7 @@
 {% block content %} {% endblock %}
 
 <footer>
-    <p>{{ constant('WEBSITE_TITLE') }}</p>
+    <p>{{ config.website.title }}</p>
 </footer>
 
 {% block script %} {% endblock %}

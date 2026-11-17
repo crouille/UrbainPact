@@ -2,3 +2,4 @@ UrbainPact.code-workspace
 node_modules
 vendor
 .idea
+config/config.json
