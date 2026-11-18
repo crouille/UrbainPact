@@ -16,3 +16,5 @@ require_once "modeles/categorie.class.php";
 require_once "modeles/photo.class.php";
 require_once "modeles/signalement.class.php";
 require_once "modeles/signalement.dao.php";
+require_once "modeles/utilisateur.class.php";
+require_once "modeles/utilisateur.dao.php";
