@@ -15,7 +15,7 @@ try {
     }
 
     if ($controleurName == "" && $methode == "") {
-        $controleurName = "signalement";
+        $controleurName = "probleme";
         $methode = "lister";
     }
 
