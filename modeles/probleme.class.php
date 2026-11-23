@@ -1,10 +1,7 @@
 <?php
 
-class Signalement
+class Probleme
 {
-    // J'ai mit l'équipe assignée en commentaire parce qu'on s'en fout pour l'instant
-    // J'ai mit aussi le créateur en commentaire parce que y'aura des conflits si je fais le modèle d'Utilisateur maintenant...vu que les autres font la connexion
-
     private ?int $id;
     private ?string $titre;
     private ?string $description;

@@ -1,6 +1,6 @@
 <?php
 
-class SignalementDAO
+class ProblemeDAO
 {
     private ?PDO $pdo;
 
@@ -22,38 +22,38 @@ class SignalementDAO
     public function findAll(): ?array
     {
         $prefixe = Config::get('database')['prefixe'];
-        $sql = "SELECT * FROM " . $prefixe . "signalement ORDER BY dateHeure DESC, upvote DESC, id";
+        $sql = "SELECT * FROM " . $prefixe . "probleme ORDER BY dateHeure DESC, upvote DESC, id";
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_ASSOC);
         $tab = $pdoStatement->fetchAll();
-        $signalements = $this->hydrateAll($tab);
-        return $signalements;
+        $problemes = $this->hydrateAll($tab);
+        return $problemes;
     }
 
     public function findAllWithDetail(): ?array
     {
         $prefixe = Config::get('database')['prefixe'];
-        $sql = "SELECT S.id, S.titre, S.description, S.dateHeure, S.upvote, S.downvote, S.etat,
+        $sql = "SELECT PR.id, PR.titre, PR.description, PR.dateHeure, PR.upvote, PR.downvote, PR.etat,
         C.id as categorie_id, C.libelle as categorie_libelle,
         P.id as photo_id, P.url as photo_url
-        FROM " . $prefixe . "signalement S
-        INNER JOIN " . $prefixe . "signalement_categorie SC ON S.id = SC.idSignalement
-        INNER JOIN " . $prefixe . "categorie C ON SC.idCategorie = C.id
-        LEFT JOIN " . $prefixe . "photo P ON S.id = P.idSignalement
+        FROM " . $prefixe . "probleme PR
+        INNER JOIN " . $prefixe . "probleme_categorie PC ON PR.id = PC.idprobleme
+        INNER JOIN " . $prefixe . "categorie C ON PC.idCategorie = C.id
+        LEFT JOIN " . $prefixe . "photo P ON S.id = P.idprobleme
         ORDER BY S.dateHeure DESC, S.upvote DESC, S.id";
 
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_ASSOC);
         $tab = $pdoStatement->fetchAll();
-        $signalements = $this->hydrateAll($tab);
-        return $signalements;
+        $problemes = $this->hydrateAll($tab);
+        return $problemes;
     }
 
-    public function hydrate(?array $tab): ?Signalement
+    public function hydrate(?array $tab): ?Probleme
     {
-        $signalement = new Signalement(
+        $probleme = new Probleme(
                 $tab[0]['id'], $tab[0]['titre'], $tab[0]['description'],
                 new DateTime($tab[0]['dateHeure']),
                 $tab[0]['upvote'], $tab[0]['downvote'], $tab[0]['etat'],
@@ -71,28 +71,28 @@ class SignalementDAO
             }
         }
 
-        $signalement->setCategories(array_values($categories));
-        $signalement->setPhotos(array_values($photos));
+        $probleme->setCategories(array_values($categories));
+        $probleme->setPhotos(array_values($photos));
 
         /* if(isset($tab[0]['createur_id'])){
             // j'utilise juste les attributs qui seront utiles
             $createur = new Utilisateur($tab[0]['createur_id'], $tab[0]['createur_role'], $tab[0]['createur_nom'], $tab[0]['createur_prenom'], $tab[0]['createur_mail']);
-            $signalement->setCreateur($createur);
+            $probleme->setCreateur($createur);
         } */
-        return $signalement;
+        return $probleme;
     }
 
     public function hydrateAll(?array $tabs): ?array
     {
-        $signalement = [];
-        $signalements = [];
+        $probleme = [];
+        $problemes = [];
         foreach ($tabs as $key => $tab) {
-            $signalement[] = $tab;
+            $probleme[] = $tab;
             if (!isset($tabs[$key + 1]) || $tab['id'] != $tabs[$key + 1]['id']) {
-                $signalements[] = $this->hydrate($signalement);
-                $signalement = [];
+                $problemes[] = $this->hydrate($probleme);
+                $probleme = [];
             }
         }
-        return $signalements;
+        return $problemes;
     }
 }
