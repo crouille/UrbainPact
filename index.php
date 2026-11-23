@@ -15,8 +15,8 @@ try {
     }
 
     if ($controleurName == "" && $methode == "") {
-        $controleurName = "signalement";
-        $methode = "lister";
+        $controleurName = "utilisateur";
+        $methode = "afficherConnexion";
     }
 
     if ($controleurName == "") {

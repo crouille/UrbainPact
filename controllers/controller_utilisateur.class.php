@@ -21,7 +21,7 @@ class ControllerUtilisateur extends Controller
             'menu' => 'connexion'
         ]);
     }
-    public function traiterConnexion(string $email, string $mdp): void
+    public function traiterConnexion(): void
     {
         $post = $this->getPost() ?? []; // si _POST est vide ça affecte un tableau vide
         $email = trim($post['email'] ?? ''); // si email est vide ça affecte une chaîne vide
@@ -38,12 +38,18 @@ class ControllerUtilisateur extends Controller
 
         if ($utilisateur !== null && password_verify($motDePasse, $utilisateur->getMotDePasse())) {
             $_SESSION['utilisateur'] =  [$utilisateur->getId(), $utilisateur->getNom(), $utilisateur->getPrenom(), $utilisateur->getRole()];
-            header('Location: index.php');
+            header('Location: index.php?controleur=signalement&methode=lister');
             exit;
         }
         else {
             $this->afficherConnexion('Adresse email ou mot de passe incorrect.', $email);
         }
-
+    }
+    public function deconnecter(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+        header('Location: index.php');
+        exit;
     }
 }
