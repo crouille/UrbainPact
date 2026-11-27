@@ -15,7 +15,7 @@ class Probleme
     // private ?Utilisateur $createur;
     // private ?Equipe $equipeAssignee;
 
-    public function __construct(?int $i = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?bool $ty = null, ?string $et = null, ?array $ca = null, ?array $m = null, ?int $u = null, ?int $dv = null /*?Utilisateur $cr=null, ?Equipe $e=null*/)
+    public function __construct(?int $i = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?bool $ty = null, ?string $et = null, ?int $u = null, ?int $dv = null, ?array $ca = null, ?array $m = null /*?Utilisateur $cr=null, ?Equipe $e=null*/)
     {
         $this->setIdprobleme($i);
         $this->setTitre($t);

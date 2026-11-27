@@ -62,7 +62,8 @@ class ProblemeDAO
     {
         $probleme = new Probleme(
                 $tab[0]['idprobleme'], $tab[0]['titre'], $tab[0]['description'],
-                new DateTime($tab[0]['dateHeure']), $tab[0]['type'], $tab[0]['etat']
+                new DateTime($tab[0]['dateHeure']), $tab[0]['type'], $tab[0]['etat'],
+                $tab[0]['upvotes'], $tab[0]['downvotes']
         );
 
         $categories = [];
@@ -79,7 +80,6 @@ class ProblemeDAO
 
         $probleme->setCategories(array_values($categories));
         $probleme->setMedias(array_values($medias));
-
         /* if(isset($tab[0]['createur_id'])){
             // j'utilise juste les attributs qui seront utiles
             $createur = new Utilisateur($tab[0]['createur_id'], $tab[0]['createur_role'], $tab[0]['createur_nom'], $tab[0]['createur_prenom'], $tab[0]['createur_mail']);
