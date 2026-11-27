@@ -20,15 +20,30 @@
                         Non Catégorisé
                     {% endfor %}
                 </p>
+                <p>Type : 
+                    {% if probleme.type %}
+                    signalement
+                    {% else %}
+                    idée
+                    {% endif %}
+                </p>
                 <p>Date : {{ probleme.dateHeure|date('d/m/Y à H:i') }}</p>
                 <p>Upvotes : {{ probleme.upvote }} | Downvotes : {{ probleme.downvote }}</p>
                 <p>État : {{ probleme.etat }}</p>
                 <p>Chemins photos :</p>
                 <ul>
-                    {% for photo in probleme.photos %}
-                        <li>
-                            <img src="{{ photo.url }}">
-                        </li>
+                    {% for media in probleme.medias %}
+                        {% if media.type %}
+                            <li>
+                                <img src="{{ media.url }}">
+                            </li>
+                        {% else %}
+                            <li>
+                                <video controls width="640">
+                                    <source src="{{ media.url }}" type="video/mp4">
+                                </video>
+                            </li>
+                        {% endif %}
                     {% else %}
                         <li>Aucune photo</li>
                     {% endfor %}

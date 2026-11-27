@@ -13,6 +13,6 @@ require_once "controllers/controller_probleme.class.php";
 // Modèles
 require_once "modeles/bd.class.php";
 require_once "modeles/categorie.class.php";
-require_once "modeles/photo.class.php";
+require_once "modeles/media.class.php";
 require_once "modeles/probleme.class.php";
 require_once "modeles/probleme.dao.php";

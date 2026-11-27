@@ -22,7 +22,11 @@ class ProblemeDAO
     public function findAll(): ?array
     {
         $prefixe = Config::get('database')['prefixe'];
-        $sql = "SELECT * FROM " . $prefixe . "probleme ORDER BY dateHeure DESC, upvote DESC, id";
+        $sql = "SELECT P.*,
+        COUNT(CASE WHEN V.type = 1 THEN 1 END) as upvotes,
+        FROM " . $prefixe . "probleme P
+        INNER JOIN " . $prefixe . "voter V ON P.id = V.idprobleme
+        ORDER BY P.dateHeure DESC, upvotes DESC, id";
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
         $pdoStatement->setFetchMode(PDO::FETCH_ASSOC);
@@ -34,14 +38,17 @@ class ProblemeDAO
     public function findAllWithDetail(): ?array
     {
         $prefixe = Config::get('database')['prefixe'];
-        $sql = "SELECT PR.id, PR.titre, PR.description, PR.dateHeure, PR.upvote, PR.downvote, PR.etat,
-        C.id as categorie_id, C.libelle as categorie_libelle,
-        P.id as photo_id, P.url as photo_url
-        FROM " . $prefixe . "probleme PR
-        INNER JOIN " . $prefixe . "probleme_categorie PC ON PR.id = PC.idprobleme
-        INNER JOIN " . $prefixe . "categorie C ON PC.idCategorie = C.id
-        LEFT JOIN " . $prefixe . "photo P ON S.id = P.idprobleme
-        ORDER BY S.dateHeure DESC, S.upvote DESC, S.id";
+        $sql = "SELECT P.idprobleme, P.titre, P.description, P.dateHeure, P.type, P.etat,
+        COUNT(CASE WHEN V.type = 1 THEN 1 END) as upvotes,
+        COUNT(CASE WHEN V.type = 0 THEN 1 END) as downvotes, 
+        C.idcategorie as categorie_id, C.libelle as categorie_libelle,
+        M.idmedia as media_id, M.url as media_url, M.type as media_type
+        FROM " . $prefixe . "probleme P
+        INNER JOIN " . $prefixe . "voter V ON P.idprobleme = V.idprobleme
+        INNER JOIN " . $prefixe . "rattacher R ON P.idprobleme = R.idprobleme
+        INNER JOIN " . $prefixe . "categorie C ON R.idCategorie = C.idcategorie
+        LEFT JOIN " . $prefixe . "media M ON P.idprobleme = M.idprobleme
+        ORDER BY P.dateHeure DESC, upvotes DESC, P.idprobleme";
 
         $pdoStatement = $this->getPdo()->prepare($sql);
         $pdoStatement->execute();
@@ -54,25 +61,24 @@ class ProblemeDAO
     public function hydrate(?array $tab): ?Probleme
     {
         $probleme = new Probleme(
-                $tab[0]['id'], $tab[0]['titre'], $tab[0]['description'],
-                new DateTime($tab[0]['dateHeure']),
-                $tab[0]['upvote'], $tab[0]['downvote'], $tab[0]['etat'],
+                $tab[0]['idprobleme'], $tab[0]['titre'], $tab[0]['description'],
+                new DateTime($tab[0]['dateHeure']), $tab[0]['type'], $tab[0]['etat']
         );
 
         $categories = [];
-        $photos = [];
+        $medias = [];
 
         foreach ($tab as $tabAssoc) {
             if (isset($tabAssoc['categorie_id'])) {
                 $categories[$tabAssoc['categorie_id']] = new Categorie($tabAssoc['categorie_id'], $tabAssoc['categorie_libelle']);
             }
-            if (isset($tabAssoc['photo_id'])) {
-                $photos[$tabAssoc['photo_id']] = new Photo($tabAssoc['photo_id'], $tabAssoc['photo_url']);
+            if (isset($tabAssoc['media_id'])) {
+                $medias[$tabAssoc['media_id']] = new Media($tabAssoc['media_id'], $tabAssoc['media_url'], $tabAssoc['media_type']);
             }
         }
 
         $probleme->setCategories(array_values($categories));
-        $probleme->setPhotos(array_values($photos));
+        $probleme->setMedias(array_values($medias));
 
         /* if(isset($tab[0]['createur_id'])){
             // j'utilise juste les attributs qui seront utiles

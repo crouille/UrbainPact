@@ -2,7 +2,7 @@
 
 class Categorie
 {
-    private ?int $id;
+    private ?int $idcategorie;
     private ?string $libelle;
 
     public function __construct(?int $id = null, ?string $l = null)
@@ -11,14 +11,14 @@ class Categorie
         $this->setLibelle($l);
     }
 
-    public function getId(): ?int
+    public function getIdcategorie(): ?int
     {
-        return $this->id;
+        return $this->idcategorie;
     }
 
-    public function setId(?int $id): void
+    public function setId(?int $idcategorie): void
     {
-        $this->id = $id;
+        $this->idcategorie = $idcategorie;
     }
 
     public function getLibelle(): ?string

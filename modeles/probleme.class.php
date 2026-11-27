@@ -2,41 +2,43 @@
 
 class Probleme
 {
-    private ?int $id;
+    private ?int $idprobleme;
     private ?string $titre;
     private ?string $description;
     private ?DateTime $dateHeure;
+    private ?array $categories;
+    private ?bool $type;
+    private ?string $etat;
+    private ?array $medias;
     private ?int $upvote;
     private ?int $downvote;
-    private ?array $categories;
-    private ?string $etat;
-    private ?array $photos;
     // private ?Utilisateur $createur;
     // private ?Equipe $equipeAssignee;
 
-    public function __construct(?int $id = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?int $u = null, ?int $dv = null, ?string $et = null, ?array $ca = null, ?array $p = null, /*?Utilisateur $cr=null, ?Equipe $e=null*/)
+    public function __construct(?int $i = null, ?string $t = null, ?string $de = null, ?DateTime $dh = null, ?bool $ty = null, ?string $et = null, ?array $ca = null, ?array $m = null, ?int $u = null, ?int $dv = null /*?Utilisateur $cr=null, ?Equipe $e=null*/)
     {
-        $this->setId($id);
+        $this->setIdprobleme($i);
         $this->setTitre($t);
         $this->setDescription($de);
         $this->setDateHeure($dh);
-        $this->setUpvote($u);
-        $this->setDownvote($dv);
+        $this->setType($ty);
         $this->setEtat($et);
         $this->setCategories($ca);
-        $this->setPhotos($p);
+        $this->setMedias($m);
+        $this->setUpvote($u);
+        $this->setDownvote($dv);
         // $this->setCreateur($cr);
         // $this->setEquipeAssignee($e);        
     }
 
-    public function getId(): ?int
+    public function getIdprobleme(): ?int
     {
-        return $this->id;
+        return $this->idprobleme;
     }
 
-    public function setId(?int $id): void
+    public function setIdprobleme(?int $idprobleme): void
     {
-        $this->id = $id;
+        $this->idprobleme = $idprobleme;
     }
 
     public function getTitre(): ?string
@@ -69,24 +71,14 @@ class Probleme
         $this->dateHeure = $dateHeure;
     }
 
-    public function getUpvote(): ?int
+    public function getType(): ?bool
     {
-        return $this->upvote;
+        return $this->type;
     }
 
-    public function setUpvote(?int $upvote): void
+    public function setType(?bool $type): void
     {
-        $this->upvote = $upvote;
-    }
-
-    public function getDownvote(): ?int
-    {
-        return $this->downvote;
-    }
-
-    public function setDownvote(?int $downvote): void
-    {
-        $this->downvote = $downvote;
+        $this->type = $type;
     }
 
     public function getEtat(): ?string {
@@ -107,14 +99,34 @@ class Probleme
         $this->categories = $categories;
     }
 
-    public function getPhotos(): ?array
+    public function getMedias(): ?array
     {
-        return $this->photos;
+        return $this->medias;
     }
 
-    public function setPhotos(?array $photos): void
+    public function setMedias(?array $medias): void
     {
-        $this->photos = $photos;
+        $this->medias = $medias;
+    }
+
+    public function getUpvote(): ?int
+    {
+        return $this->upvote;
+    }
+
+    public function setUpvote(?int $upvote): void
+    {
+        $this->upvote = $upvote;
+    }
+
+    public function getDownvote(): ?int
+    {
+        return $this->downvote;
+    }
+
+    public function setDownvote(?int $downvote): void
+    {
+        $this->downvote = $downvote;
     }
 
     /*public function getCreateur() : ?Utilisateur
@@ -136,4 +148,6 @@ class Probleme
     {
         $this->equipeAssignee = $equipeAssignee;        
     }*/
+
+
 }
